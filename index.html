@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Name</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
+      font-family: "DM Sans", sans-serif;
+      color: #1a2e1a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+      line-height: 1.5;
+    }
+
+    main {
+      max-width: 42rem;
+      width: 100%;
+      text-align: center;
+    }
+
+    .header-block {
+      text-align: right;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 700;
+      font-size: clamp(2.25rem, 6vw, 3.5rem);
+      letter-spacing: 0.02em;
+      margin-bottom: 0.35em;
+      color: #0d1f0d;
+    }
+
+    .subtitle {
+      font-family: "Cormorant Garamond", serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(1.15rem, 3vw, 1.4rem);
+      color: #2d4a2d;
+    }
+
+    .description-box {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(26, 46, 26, 0.12);
+      border-radius: 6px;
+      padding: 1.75rem 2rem;
+      margin-bottom: 2.5rem;
+      text-align: left;
+      box-shadow: 0 4px 20px rgba(26, 46, 26, 0.06);
+      font-size: 1rem;
+      color: #1a2e1a;
+      line-height: 1.65;
+    }
+
+    .description-box p {
+      margin: 0;
+    }
+
+    .projects-box {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(26, 46, 26, 0.12);
+      border-radius: 6px;
+      padding: 1.75rem 2rem;
+      margin-bottom: 2.5rem;
+      text-align: left;
+      box-shadow: 0 4px 20px rgba(26, 46, 26, 0.06);
+    }
+
+    .projects-box h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 600;
+      font-size: 1.35rem;
+      color: #0d1f0d;
+      margin-bottom: 1.1rem;
+    }
+
+    .repo-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.9rem;
+    }
+
+    .repo-item a {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      padding: 0.9rem 1rem;
+      border-radius: 10px;
+      border: 1px solid rgba(26, 46, 26, 0.12);
+      background: rgba(255, 255, 255, 0.55);
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+
+    .repo-item a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(26, 46, 26, 0.10);
+      background: rgba(255, 255, 255, 0.85);
+    }
+
+    .repo-topline {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .repo-name {
+      font-weight: 500;
+      color: #0d1f0d;
+      letter-spacing: 0.01em;
+    }
+
+    .repo-meta {
+      font-size: 0.9rem;
+      color: rgba(13, 31, 13, 0.65);
+      white-space: nowrap;
+    }
+
+    .repo-desc {
+      font-size: 0.95rem;
+      color: #2d4a2d;
+      line-height: 1.5;
+    }
+
+    .repo-loading,
+    .repo-error {
+      color: rgba(13, 31, 13, 0.75);
+      font-size: 0.95rem;
+    }
+
+    .books-box {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(26, 46, 26, 0.12);
+      border-radius: 6px;
+      padding: 1.75rem 2rem;
+      margin-bottom: 2.5rem;
+      text-align: left;
+      box-shadow: 0 4px 20px rgba(26, 46, 26, 0.06);
+    }
+
+    .books-box h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 600;
+      font-size: 1.35rem;
+      color: #0d1f0d;
+      margin-bottom: 1.25rem;
+    }
+
+    .current-reading {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: baseline;
+      margin-bottom: 1.25rem;
+    }
+
+    .current-reading .label {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 600;
+      color: #0d1f0d;
+    }
+
+    .current-reading .current-title {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 700;
+      color: #0d1f0d;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(13, 31, 13, 0.18);
+      padding-bottom: 1px;
+    }
+
+    .book-entry {
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(26, 46, 26, 0.08);
+    }
+
+    .book-entry:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .book-entry:first-child {
+      padding-top: 0;
+    }
+
+    .book-title {
+      font-weight: 500;
+      color: #0d1f0d;
+      margin-bottom: 0.35rem;
+    }
+
+    .book-description {
+      font-size: 0.95rem;
+      color: #2d4a2d;
+      line-height: 1.55;
+      margin-bottom: 0.5rem;
+    }
+
+    .star-review {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .star-review span {
+      color: #6b8f6b;
+    }
+
+    .star-review .star {
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+    }
+
+    .more-books-link {
+      margin-top: 1.1rem;
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .more-books-link a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      font-weight: 500;
+      color: #0d1f0d;
+      padding: 0.45rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(26, 46, 26, 0.14);
+      background: rgba(255, 255, 255, 0.55);
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+
+    .more-books-link a:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(26, 46, 26, 0.10);
+      background: rgba(255, 255, 255, 0.85);
+    }
+
+    .more-books-link a::after {
+      content: "→";
+      opacity: 0.75;
+    }
+
+    .social-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.25rem;
+      align-items: center;
+    }
+
+    .social-row a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      color: #1a2e1a;
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(26, 46, 26, 0.15);
+      border-radius: 50%;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+    }
+
+    .social-row a:hover {
+      background: rgba(255, 255, 255, 0.95);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(26, 46, 26, 0.12);
+    }
+
+    .social-row svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="header-block">
+      <h1>Andres Do Estreito</h1>
+      <p class="subtitle" id="subtitle">
+        <span id="subtitle-role">Cloud Engineer</span> — Working at
+        <a id="subtitle-company" style="text-decoration: none; color: inherit;" href="https://www.fastly.com/">Fastly</a>
+      </p>
+    </div>
+
+    <div class="projects-box" aria-labelledby="projects-title">
+      <h2 id="projects-title">Projects</h2>
+      <p class="repo-loading" id="repo-loading">Loading latest repos…</p>
+      <p class="repo-error" id="repo-error" style="display:none;">Couldn’t load repos right now. You can still browse them on GitHub.</p>
+      <ul class="repo-list" id="repo-list" style="display:none;"></ul>
+      <div class="more-books-link" style="margin-top: 1rem;">
+        <a href="https://github.com/adoestreito" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+      </div>
+    </div>
+
+    <div class="books-box">
+      <div class="current-reading">
+        <span class="label">I am reading:</span>
+        <a class="current-title" href="https://en.wikipedia.org/wiki/Leonard_and_Hungry_Paul" target="_blank" rel="noopener noreferrer">Leonard and Hungry Paul</a>
+      </div>
+
+      <h2>Books I've been reading</h2>
+      <article class="book-entry">
+        <div class="book-title"><a href="https://en.wikipedia.org/wiki/The_God_of_the_Woods" style="text-decoration: none; color: inherit;">God of the woods</a></div>
+        <p class="book-description">Interesting thriller about the disappearance of a young girl and the investigation that follows.</p>
+        <div class="star-review">
+          <span class="star">★★★★☆</span>
+          <span> 4/5</span>
+        </div>
+      </article>
+      <article class="book-entry">
+        <div class="book-title"><a href="https://gerardosamanocordova.com/" style="text-decoration: none; color: inherit;">Monstrilio</a></div>
+        <p class="book-description">A grief-tinged, surreal story with tenderness and teeth.</p>
+        <div class="star-review">
+          <span class="star">★★★★★</span>
+          <span> 5/5</span>
+        </div>
+      </article>
+
+      <div class="more-books-link">
+        <a href="./books.html">Show full list</a>
+      </div>
+    </div>
+
+    <div class="social-row">
+      <a style="display:none;"href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://github.com/adoestreito" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+      </a>
+      <a href="linkedin.com/in/andresdoestreito" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      <a style="display:none;" href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      </a>
+    </div>
+  </main>
+
+  <script>
+    (() => {
+      const GITHUB_USERNAME = "adoestreito";
+      const MAX_REPOS = 3;
+
+      const loadingEl = document.getElementById("repo-loading");
+      const errorEl = document.getElementById("repo-error");
+      const listEl = document.getElementById("repo-list");
+
+      const formatStars = (n) => `★ ${n}`;
+
+      fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=12`, {
+        headers: { "Accept": "application/vnd.github+json" }
+      })
+        .then((r) => {
+          if (!r.ok) throw new Error(`GitHub API error: ${r.status}`);
+          return r.json();
+        })
+        .then((repos) => {
+          const items = (Array.isArray(repos) ? repos : [])
+            .filter((repo) => repo && !repo.fork)
+            .slice(0, MAX_REPOS);
+
+          listEl.innerHTML = "";
+          for (const repo of items) {
+            const li = document.createElement("li");
+            li.className = "repo-item";
+
+            const a = document.createElement("a");
+            a.href = repo.html_url;
+            a.target = "_blank";
+            a.rel = "noopener noreferrer";
+
+            const top = document.createElement("div");
+            top.className = "repo-topline";
+
+            const name = document.createElement("div");
+            name.className = "repo-name";
+            name.textContent = repo.name || "Untitled repo";
+
+            const meta = document.createElement("div");
+            meta.className = "repo-meta";
+            meta.textContent = formatStars(repo.stargazers_count || 0);
+
+            top.appendChild(name);
+            top.appendChild(meta);
+
+            const desc = document.createElement("div");
+            desc.className = "repo-desc";
+            desc.textContent = repo.description || "—";
+
+            a.appendChild(top);
+            a.appendChild(desc);
+            li.appendChild(a);
+            listEl.appendChild(li);
+          }
+
+          loadingEl.style.display = "none";
+          if (items.length === 0) {
+            errorEl.textContent = "No public repos found yet. (Or all are forks.)";
+            errorEl.style.display = "block";
+            return;
+          }
+          listEl.style.display = "grid";
+        })
+        .catch(() => {
+          loadingEl.style.display = "none";
+          errorEl.style.display = "block";
+        });
+    })();
+  </script>
+
+  <script>
+    (() => {
+      const roleEl = document.getElementById("subtitle-role");
+      const companyEl = document.getElementById("subtitle-company");
+      if (!roleEl || !companyEl) return;
+
+      fetch("./profile.json", { cache: "no-store" })
+        .then((r) => (r.ok ? r.json() : null))
+        .then((profile) => {
+          if (!profile) return;
+          if (typeof profile.role === "string" && profile.role.trim()) {
+            roleEl.textContent = profile.role.trim();
+          }
+          if (typeof profile.companyName === "string" && profile.companyName.trim()) {
+            companyEl.textContent = profile.companyName.trim();
+          }
+          if (typeof profile.companyUrl === "string" && profile.companyUrl.trim()) {
+            companyEl.href = profile.companyUrl.trim();
+          }
+        })
+        .catch(() => {});
+    })();
+  </script>
+</body>
+</html>

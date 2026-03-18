@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Books — Andres Do Estreito</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
+      font-family: "DM Sans", sans-serif;
+      color: #1a2e1a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+      line-height: 1.5;
+    }
+
+    main {
+      max-width: 42rem;
+      width: 100%;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 700;
+      font-size: clamp(1.8rem, 4.5vw, 2.5rem);
+      letter-spacing: 0.01em;
+      color: #0d1f0d;
+    }
+
+    .backlink {
+      text-decoration: none;
+      font-weight: 500;
+      color: #0d1f0d;
+      padding: 0.4rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(26, 46, 26, 0.14);
+      background: rgba(255, 255, 255, 0.55);
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      white-space: nowrap;
+    }
+
+    .backlink:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(26, 46, 26, 0.10);
+      background: rgba(255, 255, 255, 0.85);
+    }
+
+    .books-box {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(26, 46, 26, 0.12);
+      border-radius: 6px;
+      padding: 1.75rem 2rem;
+      box-shadow: 0 4px 20px rgba(26, 46, 26, 0.06);
+      text-align: left;
+    }
+
+    .current-reading {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: baseline;
+      margin-bottom: 1.25rem;
+    }
+
+    .current-reading .label {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 600;
+      color: #0d1f0d;
+    }
+
+    .current-reading .current-title {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 700;
+      color: #0d1f0d;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(13, 31, 13, 0.18);
+      padding-bottom: 1px;
+    }
+
+    .books-box h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 600;
+      font-size: 1.35rem;
+      color: #0d1f0d;
+      margin-bottom: 1.25rem;
+    }
+
+    .book-entry {
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(26, 46, 26, 0.08);
+    }
+
+    .book-entry:first-child {
+      padding-top: 0;
+    }
+
+    .book-entry:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .book-title {
+      font-weight: 500;
+      color: #0d1f0d;
+      margin-bottom: 0.35rem;
+    }
+
+    .book-title a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .book-description {
+      font-size: 0.95rem;
+      color: #2d4a2d;
+      line-height: 1.55;
+      margin-bottom: 0.5rem;
+    }
+
+    .star-review {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .star-review span {
+      color: #6b8f6b;
+    }
+
+    .star-review .star {
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+      color: #6b8f6b;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="topbar">
+      <h1>Books</h1>
+      <a class="backlink" href="./index.html">Back</a>
+    </div>
+
+    <div class="books-box">
+      <div class="current-reading">
+        <span class="label">I am reading:</span>
+        <a class="current-title" href="https://en.wikipedia.org/wiki/Leonard_and_Hungry_Paul" target="_blank" rel="noopener noreferrer">Leonard and Hungry Paul</a>
+      </div>
+
+      <h2>Full list</h2>
+
+      <article class="book-entry">
+        <div class="book-title"><a href="https://en.wikipedia.org/wiki/The_God_of_the_Woods" target="_blank" rel="noopener noreferrer">God of the woods</a></div>
+        <p class="book-description">Interesting thriller about the disappearance of a young girl and the investigation that follows.</p>
+        <div class="star-review">
+          <span class="star">★★★★☆</span>
+          <span>4/5</span>
+        </div>
+      </article>
+
+      <article class="book-entry">
+        <div class="book-title"><a href="https://gerardosamanocordova.com/" target="_blank" rel="noopener noreferrer">Monstrilio</a></div>
+        <p class="book-description">A grief-tinged, surreal story with tenderness and teeth.</p>
+        <div class="star-review">
+          <span class="star">★★★★★</span>
+          <span>5/5</span>
+        </div>
+      </article>
+
+      <article class="book-entry">
+        <div class="book-title"><a href="https://gerardosamanocordova.com/" target="_blank" rel="noopener noreferrer">Monstrilio</a></div>
+        <p class="book-description">Short description here.</p>
+        <div class="star-review">
+          <span class="star">★★★★★</span>
+          <span>5/5</span>
+        </div>
+      </article>
+
+      <article class="book-entry">
+        <div class="book-title"><a href="https://gerardosamanocordova.com/" target="_blank" rel="noopener noreferrer">Monstrilio</a></div>
+        <p class="book-description">Another short description. Add as many entries as you like.</p>
+        <div class="star-review">
+          <span class="star">★★★★★</span>
+          <span>5/5</span>
+        </div>
+      </article>
+    </div>
+  </main>
+</body>
+</html>
+
