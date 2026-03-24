@@ -6,30 +6,44 @@
   <title>Books — Andres Do Estreito</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
   <style>
+    :root {
+      --bg: #0d1117;
+      --fg: #ff6b35;
+      --fg-dim: #cc5529;
+      --green: #22c55e;
+      --red: #ef4444;
+      --border: #30363d;
+    }
+
     * {
-      margin: 0;
-      padding: 0;
       box-sizing: border-box;
     }
 
     body {
+      font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+      background: var(--bg);
+      color: var(--fg);
+      margin: 0;
+      padding: 1.5rem 2rem;
+      line-height: 1.6;
       min-height: 100vh;
-      background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
-      font-family: "DM Sans", sans-serif;
-      color: #1a2e1a;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem 1.5rem;
-      line-height: 1.5;
+    }
+
+    a {
+      color: var(--green);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: #4ade80;
     }
 
     main {
-      max-width: 42rem;
-      width: 100%;
+      max-width: 860px;
+      margin: 0 auto;
     }
 
     .topbar {
@@ -37,79 +51,69 @@
       align-items: baseline;
       justify-content: space-between;
       gap: 1rem;
-      margin-bottom: 1.25rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
     }
 
     h1 {
-      font-family: "Cormorant Garamond", serif;
-      font-weight: 700;
-      font-size: clamp(1.8rem, 4.5vw, 2.5rem);
-      letter-spacing: 0.01em;
-      color: #0d1f0d;
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 0;
+      color: var(--fg);
     }
 
     .backlink {
-      text-decoration: none;
       font-weight: 500;
-      color: #0d1f0d;
       padding: 0.4rem 0.7rem;
-      border-radius: 999px;
-      border: 1px solid rgba(26, 46, 26, 0.14);
-      background: rgba(255, 255, 255, 0.55);
-      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      background: #161b22;
+      color: var(--fg);
       white-space: nowrap;
+      transition: background 0.2s;
     }
 
     .backlink:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(26, 46, 26, 0.10);
-      background: rgba(255, 255, 255, 0.85);
+      background: #1f2937;
+      text-decoration: none;
     }
 
     .books-box {
-      background: rgba(255, 255, 255, 0.75);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(26, 46, 26, 0.12);
-      border-radius: 6px;
-      padding: 1.75rem 2rem;
-      box-shadow: 0 4px 20px rgba(26, 46, 26, 0.06);
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: #161b22;
       text-align: left;
     }
 
+    .books-box h2 {
+      font-size: 1rem;
+      margin: 0 0 1rem 0;
+      color: var(--fg);
+      font-weight: 600;
+    }
+
     .current-reading {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      align-items: baseline;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1rem;
+      color: var(--fg-dim);
+      font-size: 0.9rem;
     }
 
     .current-reading .label {
-      font-family: "Cormorant Garamond", serif;
-      font-weight: 600;
-      color: #0d1f0d;
+      color: var(--fg-dim);
     }
 
     .current-reading .current-title {
-      font-family: "Cormorant Garamond", serif;
-      font-weight: 700;
-      color: #0d1f0d;
-      text-decoration: none;
-      border-bottom: 1px solid rgba(13, 31, 13, 0.18);
-      padding-bottom: 1px;
-    }
-
-    .books-box h2 {
-      font-family: "Cormorant Garamond", serif;
+      color: var(--green);
       font-weight: 600;
-      font-size: 1.35rem;
-      color: #0d1f0d;
-      margin-bottom: 1.25rem;
     }
 
     .book-entry {
-      padding: 1rem 0;
-      border-bottom: 1px solid rgba(26, 46, 26, 0.08);
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
     }
 
     .book-entry:first-child {
@@ -118,41 +122,37 @@
 
     .book-entry:last-child {
       border-bottom: none;
+      margin-bottom: 0;
       padding-bottom: 0;
     }
 
     .book-title {
-      font-weight: 500;
-      color: #0d1f0d;
-      margin-bottom: 0.35rem;
+      font-size: 1rem;
+      margin: 0 0 0.35rem 0;
+      font-weight: 600;
+      color: var(--fg);
     }
 
     .book-title a {
-      text-decoration: none;
-      color: inherit;
+      color: var(--green);
     }
 
     .book-description {
-      font-size: 0.95rem;
-      color: #2d4a2d;
-      line-height: 1.55;
-      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--fg);
+      margin-bottom: 0.4rem;
     }
 
     .star-review {
+      font-size: 0.85rem;
+      color: var(--fg-dim);
       display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .star-review span {
-      color: #6b8f6b;
+      gap: 0.45rem;
     }
 
     .star-review .star {
-      font-size: 1rem;
+      color: var(--green);
       letter-spacing: 0.05em;
-      color: #6b8f6b;
     }
   </style>
 </head>
