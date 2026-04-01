@@ -316,6 +316,7 @@
     (() => {
       const GITHUB_USERNAME = "adoestreito";
       const MAX_REPOS = 3;
+      const EXCLUDED_REPO_NAMES = new Set(["micro-blog", "static-website"]);
 
       const loadingEl = document.getElementById("repo-loading");
       const errorEl = document.getElementById("repo-error");
@@ -323,7 +324,7 @@
 
       const formatStars = (n) => `★ ${n}`;
 
-      fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=12`, {
+      fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=30`, {
         headers: { "Accept": "application/vnd.github+json" }
       })
         .then((r) => {
@@ -332,7 +333,12 @@
         })
         .then((repos) => {
           const items = (Array.isArray(repos) ? repos : [])
-            .filter((repo) => repo && !repo.fork)
+            .filter(
+              (repo) =>
+                repo &&
+                !repo.fork &&
+                !EXCLUDED_REPO_NAMES.has(repo.name)
+            )
             .slice(0, MAX_REPOS);
 
           listEl.innerHTML = "";
